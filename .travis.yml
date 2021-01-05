@@ -47,6 +47,6 @@ deploy:
 notifications:
   email:
     recipients:
-      - hn12344@naver.com 
+      - hn12344@naver.com
  
  
