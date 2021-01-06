@@ -23,6 +23,7 @@ before_deploy:
   - mkdir -p deploy
   - mv docker-react-app.zip deploy/docker-react-app.zip
 
+  
 deploy:
  - provider: s3
    bucket: docker-bucket-test
