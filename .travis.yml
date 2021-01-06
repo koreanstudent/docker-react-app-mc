@@ -3,5 +3,22 @@ os: linux
 
 language: node_js
 
+services:
+  - docker
+
+before_install:
+  - echo "start creating an image with dockerfile"
+  - docker build -t student/docker-react-app -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true student/docker-react-app npm run test -- --coverage
+
+after_success:
+  - echo "Test success !!"
+
+notifications:
+  email:
+    recipients:
+      - hn12344@naver.com
  
  
