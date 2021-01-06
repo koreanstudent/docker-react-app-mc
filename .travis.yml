@@ -1,7 +1,8 @@
 
 os: linux
 
-language: node_js
+language: generic
+
 
 services:
   - docker
