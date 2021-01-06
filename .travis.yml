@@ -23,7 +23,7 @@ before_deploy:
 
 deploy:
   - provider: s3
-    bucket: docker-bucket-test
+    bucket: docker-bucket-test # s3 버킷
     region: ap-northeast-2
     local_dir: deploy
     skip_cleanup: true
@@ -36,11 +36,11 @@ deploy:
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_ACCESS_KEY
-    bucket: CD-Lightsail
-    key: docker-react-app.zip
+    bucket: docker-bucket-test # s3 버킷
+    key: docker-react-app.zip  # S3 버킷에 저장된 docker-react-app.zip 파일을 EC2로 배포
     bundle_type: zip
-    application: Lightsail-codedeploy-app
-    deployment_group: Lightsail-codedeploy-group
+    application: Lightsail-codedeploy-app # 웹 콘솔에서 등록한 CodeDeploy 어플리케이션
+    deployment_group: Lightsail-codedeploy-group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
     region: ap-northeast-2
     wait_until_deployed : true
     on:
