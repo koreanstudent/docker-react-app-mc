@@ -36,7 +36,7 @@ deploy:
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_ACCESS_KEY
-    bucket: ci/cd Lightsail
+    bucket: CD-Lightsail
     key: docker-react-app.zip
     bundle_type: zip
     application: Lightsail-codedeploy-app
