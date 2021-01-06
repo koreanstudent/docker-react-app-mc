@@ -47,7 +47,6 @@ deploy:
     repo: koreanstudent/docker-react-app-mc
     branch: master
     
-
     
 notifications:
   email:
