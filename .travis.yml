@@ -1,5 +1,4 @@
-
-os: linux
+sudo: required
 
 language: generic
 
@@ -18,7 +17,7 @@ after_success:
   - echo "Test success !!"
 
 before_deploy:
-  - zip -r docker-react-app
+  - zip -r docker-react-app .
   - mkdir -p deploy
   - mv docker-react-app.zip deploy/docker-react-app.zip
 
