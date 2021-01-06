@@ -1,6 +1,8 @@
 
-language: generic
-sudo: required
+
+os: linux
+language: node.js
+# sudo: required
 
 services:
   - docker
@@ -8,6 +10,10 @@ services:
 before_install:
   - echo "start creating an image with dockerfile"
   - docker build -t student/docker-react-app -f Dockerfile.dev .
+
+branches:
+ only:
+   - master
 
 script:
   - docker run -e CI=true student/docker-react-app npm run test -- --coverage
