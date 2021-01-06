@@ -17,6 +17,7 @@ script:
 after_success:
   - echo "Test success !!"
 
+
 before_deploy:
   - zip -r docker-react-app
   - mkdir -p deploy
