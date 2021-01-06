@@ -23,31 +23,31 @@ before_deploy:
   - mv docker-react-app.zip deploy/docker-react-app.zip
 
 deploy:
- - provider: s3
-   bucket: docker-bucket-test
-   region: ap-northeast-2
-   local_dir: deploy
-   skip_cleanup: true
-   wait_until_deployed : true
-   access_key_id: $AWS_ACCESS_KEY
-   secret_access_key: $AWS_SECRET_ACCESS_KEY
-   on:
-     repo: koreanstudent/docker-react-app-mc
-     branch: master
+  - provider: s3
+    bucket: docker-bucket-test
+    region: ap-northeast-2
+    local_dir: deploy
+    skip_cleanup: true
+    wait_until_deployed : true
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_ACCESS_KEY
+    on:
+      repo: koreanstudent/docker-react-app-mc
+      branch: master
 
-- provider: codedeploy
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
-  bucket: ci/cd Lightsail
-  key: docker-react-app.zip
-  bundle_type: zip
-  application: Lightsail-codedeploy-app
-  deployment_group: Lightsail-codedeploy-group
-  region: ap-northeast-2
-  wait_until_deployed : true
-  on:
-    repo: koreanstudent/docker-react-app-mc
-    branch: master
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_ACCESS_KEY
+    bucket: ci/cd Lightsail
+    key: docker-react-app.zip
+    bundle_type: zip
+    application: Lightsail-codedeploy-app
+    deployment_group: Lightsail-codedeploy-group
+    region: ap-northeast-2
+    wait_until_deployed : true
+    on:
+      repo: koreanstudent/docker-react-app-mc
+      branch: master
 
 notifications:
   email:
