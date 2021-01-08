@@ -2,6 +2,6 @@
 
 echo "Hello Docker-compose"
 
-docker-compose up
+docker-compose up -d
 
 echo "Docker-compose started"
