@@ -2,7 +2,6 @@ sudo: required
 
 language: generic
 
-
 services:
   - docker
 
@@ -21,7 +20,7 @@ before_deploy:
   - mkdir -p deploy
   - mv docker-react-app.zip deploy/docker-react-app.zip
 
-# deploy 내에 / 사용 안됨.
+# deploy 내에 / 사용 안됨..
 deploy:
   - provider: s3
     bucket: docker-bucket-test # s3 버킷
