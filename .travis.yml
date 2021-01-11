@@ -15,17 +15,18 @@ script:
 after_success:
   - echo "Test success !!"
 
+# deploy 명령어가 실행되기 전에 수행한다.
 before_deploy:
-  - zip -r docker-react-app .
+  - zip -r docker-react-app . # 현재 위치의 모든 파일을 압축
   - mkdir -p deploy
   - mv docker-react-app.zip deploy/docker-react-app.zip
 
-# deploy 내에 / 사용 안됨..
+# 외부 서비스와 연동될 행위들을 선언한다.
 deploy:
   - provider: s3
     bucket: docker-bucket-test # s3 버킷
     region: ap-northeast-2
-    local_dir: deploy
+    local_dir: deploy # 해당 위치의 파일들만 S3로 전송
     skip_cleanup: true
     wait_until_deployed : true
     access_key_id: $AWS_ACCESS_KEY
@@ -33,16 +34,17 @@ deploy:
     on:
       branch: master
 
+    # Travis CI 빌드가 성공하면 AWS CodeDeploy에서 배포를 자동으로 진행할 수 있도록 작성한다.
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_ACCESS_KEY
-    bucket: docker-bucket-test # s3 버킷
-    key: docker-react-app.zip  # S3 버킷에 저장된 docker-react-app.zip 파일을 EC2로 배포
-    bundle_type: zip
+    bucket: docker-bucket-test # S3 버킷
+    key: docker-react-app.zip  # S3 버킷에 저장된 docker-react-app.zip 파일을 Lightsail로 배포
+    bundle_type: zip # 기본적으로 key 또는 S3_key의 파일 확장자에서 유추된다.  
     application: Lightsail-codedeploy-app # 웹 콘솔에서 등록한 CodeDeploy 어플리케이션
     deployment_group: Lightsail-codedeploy-group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
     region: ap-northeast-2
-    wait_until_deployed : true
+    wait_until_deployed : true # 기본적으로 빌드는 CodeDeploy 배포를 트리거 한 직후에 계속된다. 배포가 완료 될 떄까지 기다리려면 true
     on:
       branch: master
 
